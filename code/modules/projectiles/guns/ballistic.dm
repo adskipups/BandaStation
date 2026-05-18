@@ -146,6 +146,9 @@
 	/// Sound played when the burst mode is changed
 	var/burst_select_sound = SFX_FIRE_MODE_SWITCH
 
+	/// How much recoil the gun has.
+	recoil = 1 // BANDASTATION ADDITION: RECOIL
+
 /obj/item/gun/ballistic/Initialize(mapload)
 	. = ..()
 	if(!spawn_magazine_type)

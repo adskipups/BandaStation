@@ -90,9 +90,9 @@
 	///Screen shake when the weapon is fired
 	var/recoil = 0
 	///a multiplier of the duration the recoil takes to go back to normal view, this is (recoil*recoil_backtime_multiplier)+1
-	var/recoil_backtime_multiplier = 1.5
+	var/recoil_backtime_multiplier = 2 // BANDASTATION EDIT: RECOIL   1.5
 	///this is how much deviation the gun recoil can have, recoil pushes the screen towards the reverse angle you shot + some deviation which this is the max.
-	var/recoil_deviation = 20
+	var/recoil_deviation = 22.5 // BANDASTATION EDIT: RECOIL   20
 	/// Used as the min value when calculating recoil
 	/// Affected by a player's min_recoil_multiplier preference, so keep in mind it can ultimately be 0 regardless
 	/// Often utilized as a "purely visual" form of recoil (as it can be disabled)
@@ -244,9 +244,14 @@
 	set_light_on(FALSE)
 
 /obj/item/gun/proc/shoot_live_shot(mob/living/user, pointblank = FALSE, atom/pbtarget = null, message = TRUE)
+	// BANDASTATION EDIT START: RECOIL
+	var/angle = get_angle(user, pbtarget)+rand(-recoil_deviation, recoil_deviation) + 180
+	if(angle > 360)
+		angle -= 360
+	// BANDASTATION EDIT END
 	if(!tk_firing(user))
-		var/actual_angle = get_angle((user || get_turf(src)), pbtarget)
-		simulate_recoil(user, recoil, actual_angle)
+		// BANDASTATION REMOVAL: RECOIL var/actual_angle = get_angle((user || get_turf(src)), pbtarget)
+		recoil_camera(user, recoil+1, (recoil*recoil_backtime_multiplier) + 1, recoil, angle) // BANDASTATION EDIT: RECOIL simulate_recoil(user, recoil, actual_angle)
 	fire_sounds()
 	muzzle_flash_on()
 	if(suppressed || !message)

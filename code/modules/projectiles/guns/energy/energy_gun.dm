@@ -9,6 +9,7 @@
 	ammo_x_offset = 3
 	dual_wield_spread = 60
 	light_color = LIGHT_COLOR_CYAN
+	recoil = 0.1 // BANDASTATION ADDITION: RECOIL
 
 /obj/item/gun/energy/e_gun/Initialize(mapload)
 	. = ..()

@@ -221,7 +221,10 @@
 	//get pixels to move the camera in an angle
 	var/mpx = sin(angle) * strength
 	var/mpy = cos(angle) * strength
-
+	// BANDASTATION EDIT START: RECOIL
+	animate(my_client, pixel_x = oldx+mpx, pixel_y = oldy+mpy, time = duration, flags = ANIMATION_RELATIVE)
+	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)
+	// BANDASTATION EDIT END
 
 	if(my_client.prefs?.read_preference(/datum/preference/toggle/screen_shake_darken))
 		var/type = /atom/movable/screen/fullscreen/flash/black

@@ -55,6 +55,9 @@
 	/// A divide to the amount of charge lost when the weapon is EMP'd. Higher means more resistant.
 	var/emp_resistance = 1
 
+	/// How much recoil the gun has.
+	recoil = 0.2 // BANDASTATION ADDITION: RECOIL
+
 /obj/item/gun/energy/fire_sounds()
 	// What frequency the energy gun's sound will make
 	var/pitch_to_use = 1
